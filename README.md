@@ -1,0 +1,44 @@
+# SCION-IPFS
+
+# SCION-RAINS
+
+The vast amount of content on the Internet has made it increasingly challenging for users to quickly and reliably access relevant information. A key issue in managing and retrieving information in distributed systems is locating data items in a manner that ensures scalability, minimal communication complexity, and high reliability, even in the presence of adversaries. Specifically, determining where to store information so that requesters can easily find it, as well as enabling users to discover and efficiently locate desired data items, are critical challenges. Centralized approaches offer fast data lookup and constant search complexity but may suffer from scalability issues, single points of failure, and trust concerns. As a result, decentralized approaches are more desirable, although they often come with increased communication overhead. Recent solutions, such as the Interplanetary FileSystem (IPFS), address some of these problems but still have limitations in their performance, as discussed in the related efforts section below.
+In this project, our objective is to create a secure, reliable, and decentralized storage platform based on IPFS, that outperforms existing approaches in terms of fast, scalable content search and lookup. By leveraging path-awareness, we aim to utilize network resources efficiently to reduce search and lookup delays while enhancing overall throughput.
+SCION is a clean-slate Next-Generation Internet (NGI) architecture which offers a.o. multi-path and path-awareness capabilities by design. Moreover, SCION was designed to provide route control, failure isolation, and explicit trust information for end-to-end communication. As a result, the SCION architecture provides strong resilience and security properties as an intrinsic consequence of its design. The goal in this project is to leverage the path-awareness in SCION to align the storage and lookup in IPFS with the underlying network in an optimal manner, while at the same time using SCION to establish trust between the entities.
+While the SCION network offers a set of potential paths between two end hosts, it’s up to the application to select the optimal ones considering performance requirements in terms of delay or throughput, and potentially combining them into a multi-path connection. The primary result will be a libp2p transport library as well as an IPFS version that enables IPFS nodes to communicate over SCION. This will provide demonstrable improvements in performance and security against common routing-based attacks. The project will culminate in a comprehensive evaluation across emulated and real-world production networks, a security analysis, and the release of a well-documented library for developers.
+
+## Task 1. Native SCION Support in libp2p for IPFS
+
+This task covers the foundational work of integrating SCION into the core networking layer of IPFS, libp2p. This involves creating a new multipath-capable transport that allows IPFS peers to establish connections and transfer data over SCION paths.
+
+### Milestones
+- [ ] Definition and implementation of a SCION multiaddr format for peer addressing.
+- [ ] A working multipath transport for SCION based on the QUIC protocol within libp2p.
+
+## Task 2. Advanced Path Selection and Peer Verification
+
+This task focuses on implementing the intelligence and security features of the integration. It includes developing strategies to efficiently distribute traffic across multiple SCION paths and integrating strong cryptographic peer identity verification.
+
+### Milestones
+- [ ] Implementation of adaptive, bandwidth-aware path selection strategies to optimize performance.
+- [ ] Integration of cryptographic peer verification using SCION's Control-Plane Public Key Infrastructure (CP-PKI).
+
+## Task 3. Security Analysis and Hardening
+
+This task involves a comprehensive security analysis to verify the implementation's resilience against critical attack vectors that affect traditional P2P systems.
+
+### Milestones
+
+- [ ] Qualitative analysis of the implementation's resilience against Man-in-the-Middle (MitM), Sybil, and BGP hijacking attacks. We will onboard help from ROS provided security audit.
+- [ ] A simulation and detailed report quantifying the effectiveness of SCION-based peer validation in mitigating large-scale Sybil attacks. 
+
+## Task 4. Performance Evaluation and Demonstration
+
+This task consists of a thorough evaluation of the performance benefits of running IPFS over SCION. The work will be concluded by packaging the implementation into a reusable library with full documentation for third-party developers.
+
+### Milestones
+- [ ] Comparative performance analysis of content retrieval times in both emulated and real-world testbed (e.g., SCIONLab) environments.
+- [ ] Release 1.0 of the IPFS-over-SCION libp2p library.
+- [ ] Comprehensive developer documentation and a final performance report.
+Further information:
+- [x] [Official release](https://github.com/netsys-lab/scion-rains/releases/tag/v0.7.0), marking the completion of Task 5.
