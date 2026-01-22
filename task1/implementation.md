@@ -32,7 +32,7 @@ A node located in ISD 19, AS `ffaa:1:f`, with an internal IP of `10.0.0.1` liste
 /scion/19-ffaa:1:f/ip4/10.0.0.1/udp/123
 ```
 
-*Status:* This format has been submitted to the [multiformats/multicodec](https://github.com/multiformats/multicodec/pull/325) table and implemented in `go-multiaddr`.
+*Status:* This format has been submitted to the [multiformats/multicodec](https://github.com/multiformats/multicodec/pull/325) table and implemented in [go-multiaddr](https://github.com/multiformats/go-multiaddr/pull/285).
 
 ---
 
@@ -67,6 +67,7 @@ This transport is implemented alongside standard TCP/WebSocket/QUIC-over-IP tran
 *   **Standard peers** continue to communicate over standard IP methods.
 *   **Peer Validation:** The transport integrates with the implementation of SCION's Control-Plane PKI (CP-PKI) to ensure that the remote peer is reachable at the claimed SCION address (see Task 2).
 
+*Status:* The multipath transport is implemented in a branch in our local [go-libp2p repository](https://github.com/netsys-lab/go-libp2p/tree/feature/scion-quic-transport). We currently wait for our PR in [go-multiaddr](https://github.com/multiformats/go-multiaddr/pull/285) to be merged before opening the PR for the transport, since `go-multiaddr` is a dependency of go-libp2p, which implements the validation of multiaddresses.
 
 ## References
 *   [Multicodec Registration PR](https://github.com/multiformats/multicodec/pull/325)
