@@ -10,12 +10,13 @@ While the SCION network offers a set of potential paths between two end hosts, i
 
 ## Task 1. Native SCION Support in libp2p for IPFS
 
-This task covers the foundational work of integrating SCION into the core networking layer of IPFS, libp2p. This involves creating a new multipath-capable transport that allows IPFS peers to establish connections and transfer data over SCION paths.
+This task covers the foundational work of integrating [SCION into the core networking layer of IPFS, libp2p](task1/implementation.md). This involves creating a new multipath-capable transport that allows IPFS peers to establish connections and transfer data over SCION paths.
+
 
 ### Milestones
 - [x] [Definition and implementation of a SCION multiaddr format for peer addressing](https://github.com/multiformats/go-multiaddr/pull/285).
 - [x] [A working multipath transport for SCION based on the QUIC protocol within libp2p](https://github.com/netsys-lab/go-libp2p/tree/feature/scion-quic-transport).
-- [x] [Documentation of the task](task1/implementation.md)
+
 
 ## Task 2. Advanced Path Selection and Peer Verification
 
