@@ -67,7 +67,7 @@ This transport is implemented alongside standard TCP/WebSocket/QUIC-over-IP tran
 *   **Standard peers** continue to communicate over standard IP methods.
 *   **Peer Validation:** The transport integrates with the implementation of SCION's Control-Plane PKI (CP-PKI) to ensure that the remote peer is reachable at the claimed SCION address (see Task 2).
 
-*Status:* The multipath transport is implemented in a branch in our local [go-libp2p repository](https://github.com/netsys-lab/go-libp2p/tree/feature/scion-quic-transport). We currently wait for our PR in [go-multiaddr](https://github.com/multiformats/go-multiaddr/pull/285) to be merged before opening the PR for the transport, since `go-multiaddr` is a dependency of go-libp2p, which implements the validation of multiaddresses.
+*Status:* The multipath transport is implemented in a branch in our local [go-libp2p repository](https://github.com/netsys-lab/go-libp2p/tree/feature/scion-quic-transport). We raised an [issue](https://github.com/libp2p/go-libp2p/issues/3458) in `go-libp2p` to discuss the integration of SCION with the core maintainers. We currently wait for our PR in [go-multiaddr](https://github.com/multiformats/go-multiaddr/pull/285) to be merged before opening the PR for the transport, since `go-multiaddr` is a dependency of go-libp2p, which implements the validation of multiaddresses.
 
 ## References
 *   [Multicodec Registration PR](https://github.com/multiformats/multicodec/pull/325)
