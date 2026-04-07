@@ -23,8 +23,8 @@ This task covers the foundational work of integrating [SCION into the core netwo
 This task focuses on implementing the intelligence and security features of the integration. It includes developing strategies to efficiently distribute traffic across multiple SCION paths and integrating strong cryptographic peer identity verification.
 
 ### Milestones
-- [ ] Implementation of adaptive, bandwidth-aware path selection strategies to optimize performance.
-- [ ] Integration of cryptographic peer verification using SCION's Control-Plane Public Key Infrastructure (CP-PKI).
+- [x] [Implementation of adaptive, bandwidth-aware path selection strategies to optimize performance](task2/path-selection.md)
+- [x] [Integration of cryptographic peer verification using SCION's Control-Plane Public Key Infrastructure (CP-PKI)](task2/scion-pila.md)
 
 ## Task 3. Security Analysis and Hardening
 
