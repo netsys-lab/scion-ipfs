@@ -1,7 +1,4 @@
 
-
-
-```markdown
 # IPFS over SCION: Cryptographic Peer Validation with PILA
 
 ## Overview
