@@ -32,8 +32,8 @@ This task involves a comprehensive security analysis to verify the implementatio
 
 ### Milestones
 
-- [ ] Qualitative analysis of the implementation's resilience against Man-in-the-Middle (MitM), Sybil, and BGP hijacking attacks. We will onboard help from ROS provided security audit.
-- [ ] A simulation and detailed report quantifying the effectiveness of SCION-based peer validation in mitigating large-scale Sybil attacks. 
+- [x] [Qualitative analysis of the implementation's resilience against Man-in-the-Middle (MitM), Sybil, and BGP hijacking attacks](task3/security-analysis.md). We will onboard help from ROS provided security audit.
+- [x] [A simulation](task3/simulation-framework.md) and [detailed report](task3/report.md) quantifying the effectiveness of SCION-based peer validation in mitigating large-scale Sybil attacks. 
 
 ## Task 4. Performance Evaluation and Demonstration
 
