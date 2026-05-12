@@ -41,5 +41,5 @@ This task consists of a thorough evaluation of the performance benefits of runni
 
 ### Milestones
 - [x] [Comparative performance analysis](task4/performance-report.md) of content retrieval times in both emulated and real-world testbed (e.g., SCIONLab) environments.
-- [ ] Release 1.0 of the IPFS-over-SCION libp2p library.
+- [x] [Release 1.0 of the IPFS-over-SCION libp2p library](https://github.com/netsys-lab/scion-ipfs/releases/tag/v1.0.0).
 - [x] [Comprehensive developer documentation](task4/developer-documentation.md) and a [final performance report](task4/final-performance-report.md).
