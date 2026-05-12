@@ -1,0 +1,100 @@
+name: Build SCION-IPFS
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build ipfs binary
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout scion-ipfs
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+          cache: false   # We manage the module cache manually below
+
+      # ------------------------------------------------------------------
+      # Clone the three SCION forks side-by-side inside release/
+      # ------------------------------------------------------------------
+      - name: Clone netsys-lab/go-libp2p (SCION transport + PILA)
+        uses: actions/checkout@v4
+        with:
+          repository: netsys-lab/go-libp2p
+          ref: feature/scion-quic-transport
+          path: release/go-libp2p
+
+      - name: Clone netsys-lab/boxo (path selection strategies)
+        uses: actions/checkout@v4
+        with:
+          repository: netsys-lab/boxo
+          ref: feature/scion-boxo
+          path: release/boxo
+
+      - name: Clone netsys-lab/kubo (SCION-enabled IPFS)
+        uses: actions/checkout@v4
+        with:
+          repository: netsys-lab/kubo
+          ref: feature/scion-v0.12.0
+          path: release/kubo
+
+      # ------------------------------------------------------------------
+      # Cache the Go module download cache across runs
+      # ------------------------------------------------------------------
+      - name: Cache Go modules
+        uses: actions/cache@v4
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-gomod-${{ hashFiles('release/kubo/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-gomod-
+
+      # ------------------------------------------------------------------
+      # Patch kubo/go.mod to use the local SCION forks
+      # ------------------------------------------------------------------
+      - name: Patch go.mod replace directives
+        working-directory: release/kubo
+        run: |
+          go mod edit -dropreplace=github.com/libp2p/go-libp2p 2>/dev/null || true
+          go mod edit -dropreplace=github.com/ipfs/boxo        2>/dev/null || true
+          go mod edit -replace "github.com/libp2p/go-libp2p=../go-libp2p"
+          go mod edit -replace "github.com/ipfs/boxo=../boxo"
+          echo "Active replace directives:"
+          grep "^replace" go.mod | grep -E "go-libp2p|boxo"
+
+      - name: Resolve dependencies (go mod tidy)
+        working-directory: release/kubo
+        run: go mod tidy
+
+      # ------------------------------------------------------------------
+      # Build
+      # ------------------------------------------------------------------
+      - name: Build ipfs binary
+        working-directory: release/kubo
+        run: |
+          COMMIT=$(git rev-parse --short HEAD)
+          go build \
+            -ldflags="-X github.com/ipfs/kubo/repo/fsrepo.CurrentCommit=${COMMIT}" \
+            -o ../ipfs \
+            ./cmd/ipfs
+
+      - name: Verify binary
+        run: release/ipfs version --all
+
+      # ------------------------------------------------------------------
+      # Upload the binary as a build artifact
+      # ------------------------------------------------------------------
+      - name: Upload ipfs binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: ipfs-scion-${{ runner.os }}-${{ github.sha }}
+          path: release/ipfs
+          if-no-files-found: error
