@@ -40,6 +40,6 @@ This task involves a comprehensive security analysis to verify the implementatio
 This task consists of a thorough evaluation of the performance benefits of running IPFS over SCION. The work will be concluded by packaging the implementation into a reusable library with full documentation for third-party developers.
 
 ### Milestones
-- [ ] Comparative performance analysis of content retrieval times in both emulated and real-world testbed (e.g., SCIONLab) environments.
+- [x] [Comparative performance analysis](task4/performance-report.md) of content retrieval times in both emulated and real-world testbed (e.g., SCIONLab) environments.
 - [ ] Release 1.0 of the IPFS-over-SCION libp2p library.
-- [ ] Comprehensive developer documentation and a final performance report.
+- [x] [Comprehensive developer documentation](task4/developer-documentation.md) and a [final performance report](task4/final-performance-report.md).
