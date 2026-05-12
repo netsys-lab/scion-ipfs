@@ -19,9 +19,8 @@ GO_LIBP2P_BRANCH="feature/scion-quic-transport"
 BOXO_REPO="https://github.com/netsys-lab/boxo.git"
 BOXO_BRANCH="feature/scion-boxo"
 
-KUBO_REPO="https://github.com/ipfs/kubo.git"
-# Pin kubo to a release tag. Update this if the forks are rebased onto a newer version.
-KUBO_TAG="v0.27.0"
+KUBO_REPO="https://github.com/netsys-lab/kubo.git"
+KUBO_TAG="feature/scion-v0.12.0"
 
 # ---------------------------------------------------------------------------
 # Paths
@@ -111,9 +110,8 @@ grep "^replace" go.mod | grep -E "go-libp2p|boxo" | sed 's/^/  /'
 log "Running 'go mod tidy' (this may take a minute) …"
 if ! go mod tidy 2>&1; then
     warn "'go mod tidy' encountered errors."
-    warn "This usually means the fork branches are based on a different kubo version."
-    warn "Try adjusting KUBO_TAG at the top of this script to match the upstream"
-    warn "version that the netsys-lab forks were branched from."
+    warn "Check that the go-libp2p and boxo fork branches are compatible with"
+    warn "netsys-lab/kubo@$KUBO_TAG (inspect each fork's go.mod for version hints)."
     die "Dependency resolution failed — cannot continue."
 fi
 
